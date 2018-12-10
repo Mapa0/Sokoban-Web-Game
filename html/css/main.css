@@ -14,3 +14,42 @@ label.texto{
 div.config{
     margin:10px;
 }
+
+#moldura{
+    float:left;
+}
+
+div.moves{
+    clear: left;
+}
+
+div.data{
+    background-color: #21262c;
+    border-radius: 10px;
+    border-style: solid;
+    color: #111111;
+    float: left;
+    padding: 15px;
+}
+
+table{
+    border: 5px;
+    border-spacing: 3px;
+}
+th{
+    border: 1px;
+    padding: 1px;
+    background-color: #76976b;
+    text-align: center;
+}
+td{
+    border: 1px;
+    padding: 1px;
+    background-color: #979797;
+    text-align: center;
+}
+
+#levelName{
+    color: white;
+    text-align: center;
+}

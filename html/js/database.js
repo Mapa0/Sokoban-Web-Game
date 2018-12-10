@@ -8,10 +8,28 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.database();
-
 function salvaRecorde(nome){
-    database.ref('Fases/'+seletorFase.value+'/Jogadores/'+nome).set(
+    if(nomeFase === seletorFase.value)
+    {
+        database.ref('Fases/'+seletorFase.value+'/Jogadores/'+nome).set(
+            {
+                Movimentos: moves
+            });
+    }
+    else alert("Fase nao e original, recorde nao salvo.");
+}
+
+function mostraRecordes(){
+    let recordes = database.ref('Fases/' + seletorFase.value + '/Jogadores/');
+    recordes.orderByChild("Movimentos").on('value', function(snapshot) {
+        let content = '<tr><th>Jogador</th><th>Movimentos</th></tr>';
+        snapshot.forEach(function(data)
         {
-            Movimentos: moves
+            let nome = data.key;
+            let movimentos = data.val().Movimentos;
+            console.log(nome, movimentos);
+            content += "<tr><td>"+nome+"</td><td>"+movimentos+"</td></tr>"
         });
+        document.getElementById("Recordes").innerHTML=content;
+    });
 }

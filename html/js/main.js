@@ -9,10 +9,16 @@ var original = [[0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 4, 1, 1, 0, 0, 3, 3, 1],
                 [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                 [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]];
-var movel, moves, listaMoves, caixaNome, seletorFase, lin, col;
+var  movel, moves, listaMoves, caixaNome, seletorFase, lin, col;
+var nomeFase = "Fase1";
+var tela;
 var caixaMovida = [false];
 var sizex = 50, sizey = 50;
 var ctx = null;
+
+function zerarMatriz() {
+    original.length = 0;
+}
 
 function loadFile(url) {
     var xhr=new XMLHttpRequest();
@@ -21,16 +27,17 @@ function loadFile(url) {
     xhr.responseType = 'arraybuffer';
     xhr.addEventListener('load',function(){
         if (xhr.status === 200){
+            zerarMatriz();
             let buf = new Uint32Array(xhr.response);
             lin = buf[0];
             col = buf[1];
             console.log(lin, col);
-            for(let i = 0; i < lin; i++)
-                for(let j = 0; j < col; j++)
-                {
-                    original[i][j] = buf[i * col + j + 2];
-                    console.log(i*col+j);
+            for(let i = 0; i < lin; i++) {
+                original.push([]);
+                for (let j = 0; j < col; j++) {
+                    original[i].push(buf[i*col+j+2]);
                 }
+            }
             inicializar();
         }
     });
@@ -49,12 +56,14 @@ function inicializar() {
     moves = 0;
     listaMoves = "";
     caixaMovida.length = 0;
-    let tela = document.getElementById("jogo");
     caixaNome = document.getElementById("Nome");
     seletorFase = document.getElementById("seletorFase");
+    tela = document.getElementById("jogo");
     tela.width = col*sizex;
     tela.height = lin*sizey;
-
+    nomeFase = seletorFase.value;
+    document.getElementById("levelName").innerHTML=nomeFase + "</br><h6 style='color: mediumseagreen; text-align: center'>Melhores Jogadores</h6>";
+    mostraRecordes();
     ctx = tela.getContext('2d');
 
     rodar();
@@ -138,6 +147,10 @@ function verificaVitoria(){
 }
 
 function exibeVitoria() {
+    ctx.font="50px Lucida Console";
+    ctx.fillStyle = "red";
+    ctx.textAlign = "center";
+    ctx.fillText("VITORIA",tela.width/2,tela.height/2);
     if(caixaNome.value !== "")
         salvaRecorde(caixaNome.value);
     else alert("Como não preencheu seu nome, seu recorde não foi salvo");
