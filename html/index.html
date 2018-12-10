@@ -1,0 +1,38 @@
+<html id = "page" lang="pt" >
+  <head>
+    <meta charset="UTF-8">
+    <title>Sokoban</title>
+    <link rel ="stylesheet" href="css/main.css">
+    <script type="text/javascript" src = "js/main.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script type="text/javascript" src = "js/database.js"></script>
+  </head>
+  <body onload = "inicializar();">
+    <div class = "config">
+      <label for="Nome" class="texto">Digite seu nome:</label>
+      <input type="text" id="Nome">
+      <br/>
+      <label for="seletorFase" class = "texto">Selecione a fase:</label>
+      <select id = "seletorFase">
+        <option value ="Fase1">Fase 1</option>
+        <option value ="Fase2">Fase 2</option>
+        <option value ="Fase3">Fase 3</option>
+        <option value ="Fase4">Fase 4</option>
+        <option value ="Fase5">Fase 5</option>
+        <option value ="Fase6">Fase 6</option>
+        <option value ="Fase7">Fase 7</option>
+        <option value ="Fase8">Fase 8</option>
+        <option value ="Fase9">Fase 9</option>
+      </select>
+      <input type="button" value="Iniciar" onclick="carregarFase()">
+    </div>
+    <div id = "moldura">
+      <canvas id = "jogo"></canvas>
+    </div>
+    <div class = "config">
+      <h3 id = "texto2">Movimentos: 0</h3>
+      <input type="button" onclick="inicializar()" value="Reiniciar">
+      <input type="button" onclick="desfazerMovimento()" value="Desfazer">
+    </div>
+  </body>
+</html>

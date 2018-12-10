@@ -1,0 +1,16 @@
+#page{
+    background-color: black;
+}
+
+label.texto{
+    color :white;
+}
+
+#texto2{
+    color :white;
+    margin:10px;
+}
+
+div.config{
+    margin:10px;
+}
