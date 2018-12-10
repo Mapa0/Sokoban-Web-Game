@@ -13,13 +13,20 @@ label.texto{
 
 div.config{
     margin:10px;
+    float: left;
 }
-
+div.subMaster{
+    float: left;
+}
 #moldura{
-    float:left;
+    float: left;
 }
 
 div.moves{
+    clear: left;
+}
+
+div.master{
     clear: left;
 }
 
@@ -28,11 +35,12 @@ div.data{
     border-radius: 10px;
     border-style: solid;
     color: #111111;
-    float: left;
-    padding: 15px;
+    clear: left;
+    padding: 1px;
 }
 
 table{
+    margin: 0 auto;
     border: 5px;
     border-spacing: 3px;
 }
